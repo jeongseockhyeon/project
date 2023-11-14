@@ -9,7 +9,7 @@ export class UsersController {
     return this.usersService.signUp(userDto);
   }
   @Post('/signin')
-  signIn(@Body() userDto: UserDto) {
+  signIn(@Body() userDto: UserDto): Promise<{ accessToken: string }> {
     return this.usersService.signIn(userDto);
   }
 }

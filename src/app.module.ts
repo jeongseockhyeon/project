@@ -5,14 +5,10 @@ import { UsersService } from './users/users.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { typeORMConfig } from './configs/typeorm.config';
 import { UsersRepository } from './users/users.repository';
-
+import { JwtService } from '@nestjs/jwt';
 @Module({
-  imports: [
-    TypeOrmModule.forRoot(typeORMConfig),
-    TypeOrmModule.forFeature([UsersRepository]),
-    UsersModule,
-  ],
+  imports: [TypeOrmModule.forRoot(typeORMConfig), UsersModule],
   controllers: [UsersController],
-  providers: [UsersService, UsersRepository],
+  providers: [],
 })
 export class AppModule {}
