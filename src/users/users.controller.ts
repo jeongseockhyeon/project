@@ -8,8 +8,4 @@ export class UsersController {
   signUp(@Body(ValidationPipe) userDto: UserDto): Promise<void> {
     return this.usersService.signUp(userDto);
   }
-  @Post('/signin')
-  signIn(@Body() userDto: UserDto): Promise<{ accessToken: string }> {
-    return this.usersService.signIn(userDto);
-  }
 }
