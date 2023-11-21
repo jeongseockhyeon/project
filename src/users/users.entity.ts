@@ -2,7 +2,6 @@ import {
   BaseEntity,
   Column,
   Entity,
-  PrimaryColumn,
   PrimaryGeneratedColumn,
   Unique,
 } from 'typeorm';
