@@ -1,4 +1,4 @@
-import { Controller, Post, Body, Res, Req } from '@nestjs/common';
+import { Controller, Post, Body, Res, Req, Get } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { UserDto } from 'src/users/dto/users.dto';
 import { Response, Request } from 'express';
@@ -11,11 +11,18 @@ export class AuthController {
   async signIn(@Body() userDto: UserDto, @Res() res: Response): Promise<any> {
     //jwt 쿠키 저장
     const accesstoken = await this.authService.logIn(userDto);
+    res.setHeader('Authorization', 'Bearer' + accesstoken);
     res.cookie('jwt', accesstoken, {
       httpOnly: true,
       maxAge: 24 * 60 * 60 * 1000, //하루
     });
     return res.send({ message: 'Login' });
+  }
+  //로그인 상태
+  @Get('/cookies')
+  getCookies(@Req() req: Request, @Res() res: Response): any {
+    const jwt = req.cookies['jwt'];
+    return res.send(jwt);
   }
   //로그아웃
   @Post('/logout')
